@@ -1,4 +1,19 @@
 package org.example.models.messages;
 
-public class AiMessages {
+import jdk.jfr.Experimental;
+
+public class AiMessages implements Messages {
+
+    private MessageType messageType = MessageType.AI_MESSAGES;
+    private String modelName;
+    List<Tool> 
+
+
+
+    public MessageType getType( ) {
+
+        return this.messageType;
+
+    }
+
 }
