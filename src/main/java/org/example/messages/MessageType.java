@@ -1,8 +1,8 @@
-package org.example.models.messages;
+package org.example.messages;
 
 public enum MessageType {
 
-    SYSTEM_MESSAGES("SYSTEM_MESSAGES" , 10 ) , HUMAN_MESSAGES( "HUMAN_MESSAGES" , 5 ) , AI_MESSAGES( "AI_MESSAGES" , 2) ;
+    SYSTEM_MESSAGES("system" , 10 ) , HUMAN_MESSAGES( "user" , 5 ) , AI_MESSAGES( "assistant" , 2) ;
 
     private String type;
     private int priority;
