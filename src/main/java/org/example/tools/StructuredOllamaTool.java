@@ -1,6 +1,7 @@
 package org.example.tools;
 
 import org.example.messages.Messages;
+import org.example.models.OllamaModel;
 import org.example.tools.OwnTools.Tool;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -66,9 +67,35 @@ public class StructuredOllamaTool {
     }
 
 
-    public JSONObject json(Collection<Tool> toolsList , List<JSONObject> memory , ) {
+    public JSONObject toJSON(Collection<Tool> toolsList , List<JSONObject> memory , OllamaModel model) {
 
-        JSONObject[] toolArray =
+        JSONObject[] toolArray = toolsList.stream()
+                .map(tool -> {
+
+                    return tool.getStructuredTool();
+
+                })
+                .toArray(JSONObject[]::new);
+
+
+        JSONObject[] memoryArray = memory.stream()
+                .toArray(JSONObject[]::new);
+
+        boolean isStream = model.isStream();
+
+        String modelName = model.getModel();
+
+
+
+        JSONObject jsonOutput = new JSONObject();
+
+        jsonOutput.put("model" , modelName );
+        jsonOutput.put( "messages" , memoryArray );
+        jsonOutput.put( "stream" , isStream );
+        jsonOutput.put( "tools" , toolArray );
+
+
+        return jsonOutput;
 
     }
 

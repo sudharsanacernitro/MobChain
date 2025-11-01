@@ -1,18 +1,27 @@
 package org.example.models;
 
+import org.example.memory.InMemory;
+
 import java.nio.charset.StandardCharsets;
 
-public class OllamaModel {
+public class OllamaModel implements ChatModel {
 
     private String base_url = "http://localhost:11434";
     private String model ;
     private boolean stream = false;
+
+
+    public static InMemory memory;
+
+
 
     private OllamaModel( Builder builder ) {
 
         this.base_url = builder.base_url;
         this.model = builder.model;
         this.stream = builder.stream;
+
+        memory = InMemory.getInstance();
 
     }
 

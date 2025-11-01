@@ -1,6 +1,9 @@
 package org.example;
 
 
+import org.example.messages.SystemMessages;
+import org.example.models.ChatModel;
+import org.example.models.OllamaModel;
 import org.example.test.OllamaCaller;
 import org.example.test.OllamaToolCalling;
 import org.json.JSONObject;
@@ -13,9 +16,15 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
 
-        OllamaCaller.callOllama();
+        OllamaModel model = OllamaModel.build()
+                        .baseURL("http://localhost:11434")
+                        .model("qwen2.5:3b-instruct")
+                        .stream( false )
+                        .build();
 
-        OllamaToolCalling.call();
+        model.memory.setSystemPrompt( new SystemMessages( "You are an useful AI assistant" ));
+
+
     }
 
 
@@ -23,25 +32,5 @@ public class Main {
 
 
 
-class RAGTool {
 
-    public static final String description = "Methode to retrieve data from records";
-
-    public JSONObject getArg() {
-
-        JSONObject arg = new JSONObject();
-
-        arg.put("name"  , Arrays.asList("String" , "name of the user"));
-
-        return arg;
-
-    }
-
-
-    public String getDetails() {
-
-        return "";
-    }
-
-}
 
