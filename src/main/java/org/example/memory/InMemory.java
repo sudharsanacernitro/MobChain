@@ -7,19 +7,27 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemory<T extends Messages> {
+public class InMemory {
 
     private final List<JSONObject> memory;
     private static final int MEMORY_SIZE = 11;
 
+    private static InMemory instance;
 
-    public InMemory() {
+    private InMemory() {
 
         memory = new ArrayList<>();
 
     }
 
-    public void setSystemPrompt(T systemPrompt) {
+    public static InMemory getInstance( ) {
+
+        if( instance == null ) instance = new InMemory();
+
+        return instance;
+    }
+
+    public void setSystemPrompt( Messages systemPrompt) {
 
         JSONObject systemObject = new JSONObject();
         systemObject.put("role", systemPrompt.getRole().getType());
@@ -37,7 +45,7 @@ public class InMemory<T extends Messages> {
 
     }
 
-    public void addHumanMessage(T humanMessage) {
+    public void addHumanMessage( Messages humanMessage) {
 
         JSONObject obj = new JSONObject();
         obj.put("role", humanMessage.getRole().getType());
@@ -47,7 +55,7 @@ public class InMemory<T extends Messages> {
 
     }
 
-    public void addAiMessage(T aiMessage) {
+    public void addAiMessage(Messages aiMessage) {
 
         JSONObject obj = new JSONObject();
         obj.put("role", aiMessage.getRole().getType());
