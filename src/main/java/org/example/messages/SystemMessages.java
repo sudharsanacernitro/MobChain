@@ -7,7 +7,7 @@ public class SystemMessages implements Messages {
     private String content;
 
 
-    SystemMessages( String content ) {
+    public SystemMessages( String content ) {
 
         this.content = content;
 
