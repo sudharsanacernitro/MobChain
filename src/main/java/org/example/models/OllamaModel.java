@@ -16,6 +16,18 @@ public class OllamaModel {
 
     }
 
+    public String getBase_url() {
+        return base_url;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public boolean isStream() {
+        return stream;
+    }
+
     public static Builder build( ) {
 
         return new Builder();

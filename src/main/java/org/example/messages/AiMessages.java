@@ -5,7 +5,7 @@ public class AiMessages implements Messages {
     private MessageType messageType = MessageType.AI_MESSAGES;
     private String content;
 
-    //want to store selected tool
+    //want to  selected tool
 
 
     public AiMessages( String content ) {

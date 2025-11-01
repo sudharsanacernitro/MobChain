@@ -1,0 +1,87 @@
+package org.example.tools;
+
+import org.example.memory.InMemory;
+import org.example.messages.Messages;
+import org.example.models.OllamaModel;
+import org.example.tools.OwnTools.Tool;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+
+public class StructuredInput {
+
+    JSONObject structuredData ;
+
+
+    StructuredInput( Builder builder ) {
+
+        structuredData = new JSONObject();
+
+        structuredData.put("base_url" , builder.modelParams.getBase_url() );
+        structuredData.put( "model" , builder.modelParams.getModel() );
+
+        structuredData.put("messages" , builder.memory );
+
+        structuredData.put("stream" , builder.modelParams.isStream() );
+
+
+
+    }
+
+    public JSONObject getStructuredData( ) {
+
+        return structuredData;
+
+    }
+
+
+    public static Builder build( ) {
+
+        return new Builder();
+
+    }
+
+    static class Builder {
+
+        List<JSONObject> memory;
+        OllamaModel modelParams;
+        HashMap<String , Tool> toolsMetaData;
+
+
+        public Builder InitMemory( InMemory inMemory ) {
+
+            this.memory = inMemory.getAllMessages();
+
+            return this;
+
+        }
+
+
+        public Builder InitModel( OllamaModel modelParams ) {
+
+            this.modelParams = modelParams;
+
+            return this;
+
+        }
+
+
+        public Builder getToolsMetaData( ToolsManager manager ) {
+
+            this.toolsMetaData = manager.getToolsRegistry();
+
+            return this;
+
+        }
+
+        public StructuredInput build( ) {
+
+            return new StructuredInput( this );
+
+        }
+
+
+    }
+
+}
