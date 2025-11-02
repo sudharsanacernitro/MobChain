@@ -36,6 +36,12 @@ public class RAGTool implements Tool{
     }
 
 
+    @Override
+    public String getToolName( ) {
+
+        return toolName;
+
+    }
 
 
     @Override

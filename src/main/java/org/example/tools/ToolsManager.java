@@ -12,29 +12,13 @@ import org.example.tools.OwnTools.RAGTool;
 
 public class ToolsManager {
 
-   public  static HashMap< String , Tool > toolsRegistry = new HashMap<>();
+   public  HashMap< String , Tool > toolsRegistry = new HashMap<>();
 
-   private static ToolsManager instance;
 
-   static {
 
-       toolsRegistry.put( "rag_tool" , new RAGTool() );
+   public ToolsManager( ) {
 
    }
-
-
-   private ToolsManager( ) {
-
-   }
-
-   public static ToolsManager getInstance( ) {
-
-       if( instance == null ) instance = new ToolsManager();
-
-       return instance;
-
-   }
-
 
 
 
@@ -52,7 +36,7 @@ public class ToolsManager {
    }
 
 
-   public static void addTools( String functionName , Tool newTool ) {
+   public void addTools( String functionName , Tool newTool ) {
 
        toolsRegistry.put( functionName , newTool );
 
