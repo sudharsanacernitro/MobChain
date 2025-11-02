@@ -12,20 +12,14 @@ public class InMemory {
     private final List<JSONObject> memory;
     private static final int MEMORY_SIZE = 11;
 
-    private static InMemory instance;
 
-    private InMemory() {
+    public  InMemory() {
 
         memory = new ArrayList<>();
 
     }
 
-    public static InMemory getInstance( ) {
 
-        if( instance == null ) instance = new InMemory();
-
-        return instance;
-    }
 
     public void setSystemPrompt( Messages systemPrompt) {
 
