@@ -2,6 +2,7 @@ package org.example;
 
 
 import org.example.memory.InMemory;
+import org.example.messages.HumanMessages;
 import org.example.messages.SystemMessages;
 import org.example.models.ChatModel;
 import org.example.models.OllamaModel;
@@ -22,7 +23,7 @@ public class Main {
         InMemory memory = new InMemory();
 
         OllamaModel model = OllamaModel.build()
-                        .baseURL("http://localhost:11434")
+                        .baseURL("http://localhost:11434/api/chat")
                         .model("qwen2.5:3b-instruct")
                         .stream( false )
                         .memory( memory )
@@ -31,7 +32,11 @@ public class Main {
 
         memory.setSystemPrompt( new SystemMessages( "you are an usefull AI agri assistant,your name is sandy") );
 
-        
+
+        String message = model.chat( new HumanMessages("give weather report for Erode , India."));
+
+
+        System.out.println( message );
 
 
     }
