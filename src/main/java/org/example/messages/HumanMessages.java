@@ -9,7 +9,7 @@ public class HumanMessages implements Messages {
     //want to declare tools specifications
 
 
-    HumanMessages( String content ) {
+    public HumanMessages( String content ) {
 
         this.content = content;
 

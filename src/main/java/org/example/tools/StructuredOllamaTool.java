@@ -67,7 +67,7 @@ public class StructuredOllamaTool {
     }
 
 
-    public JSONObject toJSON(Collection<Tool> toolsList , List<JSONObject> memory , OllamaModel model) {
+    public static JSONObject toJSON(Collection<Tool> toolsList , List<JSONObject> memory , OllamaModel model) {
 
         JSONObject[] toolArray = toolsList.stream()
                 .map(tool -> {

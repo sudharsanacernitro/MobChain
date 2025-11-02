@@ -1,8 +1,13 @@
 package org.example.models;
 
+import org.example.client.ollamaClient.Request;
 import org.example.memory.InMemory;
+import org.example.messages.HumanMessages;
+import org.example.messages.Messages;
 import org.example.tools.OwnTools.Tool;
+import org.example.tools.StructuredOllamaTool;
 import org.example.tools.ToolsManager;
+import org.json.JSONObject;
 
 import java.util.Collection;
 import java.util.List;
@@ -71,6 +76,28 @@ public class OllamaModel implements ChatModel {
 
     }
 
+    public String chat( HumanMessages message ) {
+
+        memory.addHumanMessage( message );
+
+        JSONObject requestObject = StructuredOllamaTool.toJSON( toolsManager.getToolsArray() , memory.getAllMessages() , this );
+
+        try{
+
+            return Request.sendRequest( requestObject , base_url );
+
+        } catch( Exception e ) {
+
+        }
+
+
+
+        return "";
+
+//        return "working";
+
+    }
+
 
 
     public static Builder build( ) {
@@ -126,7 +153,7 @@ public class OllamaModel implements ChatModel {
 
             }
 
-
+            return this;
 
         }
 

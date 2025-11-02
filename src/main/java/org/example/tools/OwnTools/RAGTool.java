@@ -12,7 +12,7 @@ public class RAGTool implements Tool{
 
 
     public static final String toolName = "rag_tool";
-    public static final String description = "Tool to search document to give current answers";
+    public static final String description = "Tool to give weather report for a city";
 
 
     private static  JSONObject structuredTool;
