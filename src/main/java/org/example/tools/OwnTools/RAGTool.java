@@ -72,7 +72,7 @@ public class RAGTool implements Tool{
         String country = args.getString("country");
 
         JSONObject res = new JSONObject();
-        res.put("result" , "your area is not infected");
+        res.put("weather" , "it seems to be rainy.");
 
         return res;
 

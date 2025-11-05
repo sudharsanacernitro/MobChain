@@ -1,6 +1,7 @@
 package org.example;
 
 
+import org.example.client.ollamaClient.Response;
 import org.example.memory.InMemory;
 import org.example.messages.HumanMessages;
 import org.example.messages.SystemMessages;
@@ -35,8 +36,13 @@ public class Main {
 
         String message = model.chat( new HumanMessages("give weather report for Erode , India."));
 
+        Response res = Response.builder()
+                        .parseOutput( message )
+                                .build();
 
-        System.out.println( message );
+
+
+        System.out.println( res );
 
 
     }
