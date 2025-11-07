@@ -11,7 +11,7 @@ import java.util.concurrent.Future;
 public class Request {
 
 
-    public static String sendRequest(JSONObject jsonBody , String endpoint ) throws Exception {
+    public static synchronized String sendRequest(JSONObject jsonBody , String endpoint ) throws Exception {
 
         OkHttpClient client = new OkHttpClient();
 

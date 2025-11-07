@@ -28,6 +28,18 @@ public class ToolsManager {
 
    }
 
+   public Tool getToolByName( String name ) {
+
+       if( toolsRegistry.containsKey( name ) ) {
+
+           return toolsRegistry.get( name );
+
+       }
+
+       return null;
+
+   }
+
 
    public Collection<Tool> getToolsArray( ) {
 

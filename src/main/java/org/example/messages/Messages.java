@@ -1,5 +1,7 @@
 package org.example.messages;
 
+import org.json.JSONObject;
+
 public interface Messages {
 
 
@@ -10,4 +12,13 @@ public interface Messages {
 
     public void setContent( String setContent );
 
+    public JSONObject getFunctionCalls( );
+
+    default public String getToolName() {
+
+        return "";
+
+    }
+
 }
+

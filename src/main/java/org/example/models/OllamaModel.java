@@ -1,16 +1,19 @@
 package org.example.models;
 
-import org.example.client.ollamaClient.Request;
+import org.example.client.Request;
+import org.example.client.Response;
+import org.example.client.parsers.Parser;
+import org.example.client.parsers.QwenParser;
 import org.example.memory.InMemory;
+import org.example.messages.AiMessages;
 import org.example.messages.HumanMessages;
-import org.example.messages.Messages;
 import org.example.tools.OwnTools.Tool;
-import org.example.tools.StructuredOllamaTool;
 import org.example.tools.ToolsManager;
+import org.example.tools.executor.Executor;
 import org.json.JSONObject;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 public class OllamaModel implements ChatModel {
 
@@ -76,25 +79,66 @@ public class OllamaModel implements ChatModel {
 
     }
 
+
+
+    private Parser selectParser( String modelName ) {
+
+        if( model.toLowerCase().contains("qwen") ) {
+
+            return new QwenParser();
+
+        }
+
+        return new QwenParser();
+
+    }
+
+
+
     public String chat( HumanMessages message ) {
 
         memory.addHumanMessage( message );
 
-        JSONObject requestObject = StructuredOllamaTool.toJSON( toolsManager.getToolsArray() , memory.getAllMessages() , this );
+        Parser parser = selectParser( model );
+
+        JSONObject requestObject = parser.toJSON( toolsManager.getToolsArray() , memory.getAllMessages() , this );
 
         try{
 
-            return Request.sendRequest( requestObject , base_url );
+            String jsonResponse = Request.sendRequest( requestObject , base_url );
+
+            Response res = parser.fromJSONString( jsonResponse );
+
+            memory.addAiMessage( res.getJsonAIMessage() );
+
+            if( res.getFunctions() == null ) {
+
+
+
+                return res.getContent();
+
+            }
+
+            Executor.execute( res , this.toolsManager , this.memory );
+
+            JSONObject requestO = parser.toJSON( toolsManager.getToolsArray() , memory.getAllMessages() , this );
+
+            System.out.println("request :"+requestO);
+
+            System.out.println("processed result : "+ Request.sendRequest( requestO , base_url ) +"\n" );
+
+            return res.toString();
 
         } catch( Exception e ) {
 
+
+
         }
-
-
 
         return "";
 
-//        return "working";
+
+
 
     }
 
@@ -142,6 +186,7 @@ public class OllamaModel implements ChatModel {
 
             return this;
         }
+
 
         public Builder tools( List<Tool> tools ) {
 

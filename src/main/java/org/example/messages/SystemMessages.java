@@ -1,6 +1,8 @@
 package org.example.messages;
 
 
+import org.json.JSONObject;
+
 public class SystemMessages implements Messages {
 
     private final MessageType type = MessageType.SYSTEM_MESSAGES ;
@@ -32,6 +34,11 @@ public class SystemMessages implements Messages {
 
         this.content = content;
 
+    }
+
+
+    public JSONObject getFunctionCalls() {
+        return null;
     }
 
 

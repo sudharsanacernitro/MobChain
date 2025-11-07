@@ -2,7 +2,8 @@ package org.example.messages;
 
 public enum MessageType {
 
-    SYSTEM_MESSAGES("system" , 10 ) , HUMAN_MESSAGES( "user" , 5 ) , AI_MESSAGES( "assistant" , 2) ;
+    SYSTEM_MESSAGES("system" , 10 ) , HUMAN_MESSAGES( "user" , 5 ) , AI_MESSAGES( "assistant" , 2) ,
+    TOOL_MESSAGES( "tool" , 8);
 
     private String type;
     private int priority;

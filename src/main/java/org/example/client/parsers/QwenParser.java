@@ -43,7 +43,7 @@ public class QwenParser implements Parser {
 
         }
 
-        return new Response( content , functionObjects );
+        return new Response( content , functionObjects , message );
 
     }
 

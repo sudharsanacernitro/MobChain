@@ -1,7 +1,6 @@
 package org.example.memory;
 
 import org.example.messages.Messages;
-import org.example.messages.SystemMessages;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -54,12 +53,38 @@ public class InMemory {
         JSONObject obj = new JSONObject();
         obj.put("role", aiMessage.getRole().getType());
         obj.put("content", aiMessage.getContent());
+        obj.put("function_calls" , aiMessage.getFunctionCalls() );
 
         memory.add(obj);
 
         if (memory.size() > MEMORY_SIZE && memory.size() > 1) {
             memory.remove(1);
         }
+
+    }
+
+    public void addAiMessage( JSONObject aiMessage ) {
+
+        memory.add( aiMessage );
+
+        if (memory.size() > MEMORY_SIZE && memory.size() > 1) {
+
+            memory.remove(1);
+
+        }
+
+    }
+
+    public void addToolMessage( Messages toolMessage ) {
+
+
+        JSONObject obj = new JSONObject();
+
+        obj.put( "role" , toolMessage.getRole().getType() );
+        obj.put("name" , toolMessage.getToolName());
+        obj.put( "content" , toolMessage.getFunctionCalls().toString() );
+
+        memory.add( obj );
 
     }
 
@@ -73,5 +98,13 @@ public class InMemory {
 
         memory.clear();
 
+    }
+
+    @Override
+    public String toString( ) {
+
+        System.out.println( memory );
+
+        return null;
     }
 }

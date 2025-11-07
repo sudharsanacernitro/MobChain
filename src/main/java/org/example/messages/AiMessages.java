@@ -1,16 +1,20 @@
 package org.example.messages;
 
+import org.json.JSONObject;
+
 public class AiMessages implements Messages {
 
     private MessageType messageType = MessageType.AI_MESSAGES;
     private String content;
+    private JSONObject functionCalls;
 
     //want to  selected tool
 
 
-    public AiMessages( String content ) {
+    public AiMessages( String content , JSONObject functionCalls ) {
 
         this.content = content;
+        this.functionCalls = functionCalls;
 
     }
 
@@ -32,6 +36,12 @@ public class AiMessages implements Messages {
     public void setContent( String content ) {
 
         this.content = content;
+
+    }
+
+    public JSONObject getFunctionCalls( ) {
+
+        return functionCalls;
 
     }
 
