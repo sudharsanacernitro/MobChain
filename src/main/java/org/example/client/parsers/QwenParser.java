@@ -1,26 +1,50 @@
-package org.example.tools;
+package org.example.client.parsers;
 
-import org.example.messages.Messages;
+import org.example.client.Response;
 import org.example.models.OllamaModel;
 import org.example.tools.OwnTools.Tool;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class StructuredOllamaTool {
-
-    private Tool currTool ;
+public class QwenParser {
 
 
-    StructuredOllamaTool(Tool currTool ) {
+    public  static Response fromJSONString( String jsonString ) {
 
-            this.currTool = currTool;
+        JSONObject root = new JSONObject(jsonString);
+        JSONObject message = root.getJSONObject("message");
+
+        String content = message.getString( "content" );
+
+        JSONArray toolCalls = message.getJSONArray("tool_calls");
+
+
+        List< Response.Function > functionObjects = new ArrayList<>();
+
+
+
+        for( int index = 0 ; index < toolCalls.length() ; index++ ) {
+
+            JSONObject toolCall = toolCalls.getJSONObject(index);
+            JSONObject function = toolCall.getJSONObject("function");
+
+            JSONObject arguments = function.getJSONObject("arguments");
+            String functionName = function.getString( "name" );
+
+            Response.Function functionObject = new Response.Function( functionName , arguments );
+
+            functionObjects.add( functionObject );
+
+        }
+
+        return new Response( content , functionObjects );
 
     }
-
 
     public static JSONObject createFunctionTool(
 
@@ -98,11 +122,6 @@ public class StructuredOllamaTool {
         return jsonOutput;
 
     }
-
-
-
-
-
 
 
 

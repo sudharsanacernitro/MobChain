@@ -1,4 +1,4 @@
-package org.example.client.ollamaClient;
+package org.example.client;
 
 import okhttp3.*;
 import org.json.JSONObject;
@@ -40,8 +40,7 @@ public class Request {
             }
         });
 
-        System.out.println("Waiting for Ollama response...");
-        System.out.println("Response:\n" + result.get());
+
 
         executor.shutdown();
 
