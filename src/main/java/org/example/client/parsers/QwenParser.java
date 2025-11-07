@@ -11,10 +11,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class QwenParser {
+public class QwenParser implements Parser {
 
 
-    public  static Response fromJSONString( String jsonString ) {
+    @Override
+    public  Response fromJSONString( String jsonString ) {
 
         JSONObject root = new JSONObject(jsonString);
         JSONObject message = root.getJSONObject("message");
@@ -46,7 +47,8 @@ public class QwenParser {
 
     }
 
-    public static JSONObject createFunctionTool(
+
+    public  static JSONObject createFunctionTool(
 
             String functionName,
             String description,
@@ -91,7 +93,9 @@ public class QwenParser {
     }
 
 
-    public static JSONObject toJSON(Collection<Tool> toolsList , List<JSONObject> memory , OllamaModel model) {
+
+    @Override
+    public JSONObject toJSON(Collection<Tool> toolsList , List<JSONObject> memory , OllamaModel model) {
 
         JSONObject[] toolArray = toolsList.stream()
                 .map(tool -> {
