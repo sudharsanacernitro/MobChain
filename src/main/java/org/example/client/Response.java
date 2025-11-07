@@ -8,14 +8,24 @@ public class Response {
 
    private String content;
    private List< Function > functions;
+   private JSONObject jsonAIMessage ;
 
 
-   public Response( String content , List<Function>  functions ) {
+   public Response( String content , List<Function>  functions , JSONObject jsonAIMessage ) {
 
        this.content = content;
        this.functions = functions;
+       this.jsonAIMessage = jsonAIMessage;
 
    }
+
+    public JSONObject getJsonAIMessage() {
+        return jsonAIMessage;
+    }
+
+    public void setJsonAIMessage(JSONObject jsonAIMessage) {
+        this.jsonAIMessage = jsonAIMessage;
+    }
 
     public String getContent() {
         return content;

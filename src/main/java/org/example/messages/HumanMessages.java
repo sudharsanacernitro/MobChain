@@ -1,5 +1,7 @@
 package org.example.messages;
 
+import org.json.JSONObject;
+
 public class HumanMessages implements Messages {
 
 
@@ -34,6 +36,11 @@ public class HumanMessages implements Messages {
 
         this.content = content;
 
+    }
+
+    @Override
+    public JSONObject getFunctionCalls() {
+        return null;
     }
 
 

@@ -1,6 +1,7 @@
 package org.example.tools.OwnTools;
 
-import org.example.tools.StructuredOllamaTool;
+import org.example.client.parsers.QwenParser;
+
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class RAGTool implements Tool{
         parameters.put("city", Arrays.asList("string", "city mentioned in the input"));
         parameters.put("country", Arrays.asList("string", "country mentioned in the input"));
 
-        structuredTool = StructuredOllamaTool.createFunctionTool(
+        structuredTool = QwenParser.createFunctionTool(
 
                 toolName,
                 description,
@@ -63,6 +64,8 @@ public class RAGTool implements Tool{
     public JSONObject runTool( JSONObject args ) {
 
         if( ! args.has("city") || ! args.has( "country" ) ) {
+
+            System.out.println(" Error in tool ");
 
             throw new IllegalArgumentException("The inputs 'city' and 'country' is not present");
 
